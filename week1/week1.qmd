@@ -1,0 +1,182 @@
+---
+title: "Week 1: Intro"
+---
+
+What is an algorithm? 
+
+> A (finite) sequence of instructions that transforms
+some (well-specified) input into (well-specified) output.
+
+Definition from wikipedia:
+
+> In mathematics and computer science, an algorithm is an 
+effective method expressed as a finite list of 
+well-defined instructions for calculating a function. 
+
+Algorithm = "A tool for solving a well-defined computational 
+problem"
+
+Algorithm $f:$ input $\to$ output.
+
+Properties? 
+
+  - Run-time (time complexity)
+  - Space complexity (how much disk space is taken up)
+    - Sorting can be done in place
+  - Decideability
+    - When a computer gets to a step, it has to know what to do. 
+
+Often time and space complexity play off each other. 
+
+Rhetorical appeal: just look on Instagram — we store so much 
+stuff. Apparently space is cheap. 
+
+
+```python
+1. do x 
+   or do y 
+
+# not an algorithm
+```
+
+```
+1. flip coin 
+2. if heads -> x 
+      tails -> y
+
+# is an algorithm
+```
+
+Randomness comes in different flavors:
+
+  - Quicksort is a method that always sorts, but its run-time is random. 
+  - MCMC uses randomness in the result, because if we run it twice 
+the results are different. 
+
+Runtime and correctness are the gold-standard in methodology development.
+Prove runtime, prove correctness in the p-sets. 
+
+Input: a set of numbers $\langle a_1, a_2, ..., a_n \rangle$. 
+
+Output: Sorted sequence of input data 
+$\langle a_1', a_2', ..., a_n' \rangle$ with 
+$a_1' \leq ... \leq a_n'$. 
+
+A sorting algorithm $f$ solves the problem defined by the 
+input-output relationship. 
+
+There are many sorting techniques. 
+
+## 
+
+An iconic algorithm: 
+
+:::{.chilltip}
+```python
+function gcd(a,b): 
+  while a ≠ b:
+    if a > b:
+      a := a-b
+    else: 
+      b := b-a
+  return a
+
+gcd: 20, 15 -> 5 
+
+a = 20, b = 15 
+a = 5, b = 15, 
+a = 5, b = 1 
+a = 5, b = 5
+```
+:::
+
+This algorithm is the greatest common divisor. 
+
+This is used in encryption and it is still the fastest 
+algorithm. 
+
+From ~300 BC from Euclid of Alexandria. 
+
+Examples of algorithms: 
+
+  - Sorting Algorithms 
+  - Optimization Problems: 
+    - Traveling salesman: chip design, airline schedule 
+  - Mathematical problems: 
+    - Solution of linear equations / matrix algebra 
+    - Integration 
+  - Statistical problems 
+    - Optimal designs / power calculations 
+    - Computation of distributions 
+    - Computation of test statistics
+
+
+Examples: 
+
+  - Euclid GCD 
+  - Pagerank 
+  - Gradient descent 
+    - Local minimum 
+  - Bellman; Ford; shortest path and allow negative weights
+  - Djikstra 
+  - Compression 
+  - Word2Vec 
+  - Shannon Encoding for Transmission Errors
+  - Tower of Hanoi 
+    - Recursive
+
+Georg's hit-list: 
+
+  - Euclid 
+  - Quadratic Sieve 
+  - Berlekamp 
+  - Cantor-Zassehaus 
+
+Factoring numbers is super-polynomial but sub-exponential.  It's like 
+almost exponential. This doesn't go for factoring polynomials. 
+
+When multiplying numbers, all the terms get jumbled up whereas we know where
+the pieces came from in polynomials: 
+
+```
+(123 * 827) = (1*10^2 + 2 * 10^2 + 3 * 10^0 ) * (...)
+
+vs. 
+
+(2x + 3)(x^2 + 1)
+```
+
+:::{.chilltip}
+What do random numbers and compression have in common? 
+:::
+
+
+
+Properties of Algorithms 
+
+  - Feasibility
+  - Termination
+  - Deterministic 
+  - Finite
+
+Algorithms work on dynamic sets of elements
+(input -> output): 
+
+  - Searching, inserting and deleting elements 
+  - Maximum, minimum element 
+
+Data structures are used for the implementation of 
+dynamic datasets. The efficiency of a data structure
+can depend on the desired manipulation operation.
+
+Examples of data structures: 
+
+  - Array: access to elements based on index 
+    - Continuous allocated memory, evenly divided
+  - Linked List: reference / pointer to the next element 
+  - Stack: dynamic set of elements, last in first out
+  - Queue: dynamic set of elements, can only be
+  read starting from most longest added element,
+  first-in-first-out
+  - Graphs or Trees: elements have references/pointers to 
+  a variable number of other elements

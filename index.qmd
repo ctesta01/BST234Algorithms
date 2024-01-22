@@ -1,0 +1,85 @@
+---
+title: "Data Structures (BST 234) Notes"
+format: 
+  html:
+    toc: true
+    theme: ../style.scss
+---
+
+Building 2, room 435
+
+Research interests: 
+algorithmic mathematics and statistics, 
+efficient and randomized algorithms, 
+methodology development, multiple testing, 
+NP-complete problems. 
+
+TA: Max Wang
+
+Take home midterm and final presentation project. 
+
+Week after of Spring Break is midterm. 
+
+Typically homework psets are due Monday at 11:59 PM. 
+
+There is a bit of programming in this course, but the 
+course is mostly theoretical. 
+
+## Goals for the course
+
+Introduction to important computational problems in computer science (biostatistics) and state of the art algorithms
+for solving them. 
+
+Understanding of data structures and algorithms 
+to solve problems of practical relevance. 
+
+Understanding of mathematical standards for numerical analysis and statistics, inclusding their 
+implementations. 
+
+Knowledge of R and Python is vital (lab sessions). 
+
+Why is it always "Data Structures And Algorithms"? 
+
+Because the two are intrinsically linked; they don't mean
+much without the other. 
+
+Why? Because the algorithm may run much faster or 
+slower depending on the data structure. 
+
+For example, we might have a list. Or we might have a 
+hash-map. Some things are fast in lists, whereas 
+different things are fast in a hash-map. 
+
+Often we have an end-pointer if we have a doubly-linked list. 
+
+For example, popping the first element, or last element, 
+these are $O(1)$ operations (including updating pointers). 
+In contrast, searching is an $O(n)$ operation when traversing. 
+
+If we have a binary tree (heap), then searching is 
+$O(\log_2 n )$. 
+
+We will use the Cormen, Leiserson, Rivest, Stein. CLLS. 
+Available for free on HOLLIS. 
+
+
+Contents 
+  
+  1. Introduction, random numbers 
+  2. Concepts of algorithms, complexity and sorting algorithms 
+  3. Data structures and heapsort 
+  4. Greedy algorithms and dynamic programming 
+  5. Introduction to parallel programming 
+  6. P and NP 
+  7. Numerical aspects of computer algorithms, 
+  condition of a problem, numerical stability 
+  of an algorithm, numerical error,
+  forward/backward-error 
+  8. Efficient algorithms for linear algebra
+  9. Least-Squares Program, Eigenvalue Decomposition
+  10. Numerical integration, Monte Carlo integration,
+  importance sampling 
+  11. Numerical optimization 
+  12. Work on projects
+  13. Project presentations
+

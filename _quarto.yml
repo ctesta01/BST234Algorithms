@@ -1,0 +1,13 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "Data Structures and Algorithms (BST 234) Notes"
+  author: "Christian Testa"
+  chapters:
+    - index.qmd
+    - week1/week1.qmd
+
+filters:
+  - pseudocode
