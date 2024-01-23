@@ -180,3 +180,41 @@ Examples of data structures:
   first-in-first-out
   - Graphs or Trees: elements have references/pointers to 
   a variable number of other elements
+
+Compare and contrast the array, doubly-linked list, and the heap: 
+
+![](figures/array/array.svg){width='50%' fig-align='center'}
+
+![](figures/list/list.svg){width='100%'}
+
+![](figures/heap/heap.svg){width='100%'}
+
+The array has the property that if every element is of the same 
+structure and takes up the same amount of memory, we can access 
+the nth element quickly by calculating where it will be in memory 
+and looking there. However, to update an array can be annoying 
+because if it is growing and the neighboring memory is not free,
+we might have to move the whole array. 
+
+The doubly-linked list facilitates things like: 
+
+  - Easy insertions or deletions anywhere
+  - Quickly accessing the first and last elements 
+  - Easy storage in memory since memory doesn't need to be in 
+  one contiguous block
+
+But search algorithms are limited to stepping through the list until a 
+desired element is found. 
+
+On the other hand, the heap allows for intelligent searching. Of course heaps
+aren't good for everything: for example, accessing the nth element would be easier in an 
+array than in a heap. 
+
+References: 
+
+Berlekamp's algorithm
+<https://en.wikipedia.org/wiki/Berlekamp%27s_algorithm>
+
+Rotating doubly-linked list: 
+<https://tex.stackexchange.com/questions/242044/add-label-to-a-rotated-doubly-linked-list>
+

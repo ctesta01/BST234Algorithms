@@ -1,34 +1,42 @@
-\documentclass{article}
+\documentclass[tikz, margin=3.14mm]{standalone}
+
 \usepackage{tikz}
-\usetikzlibrary{decorations, calc, arrows, arrows.meta, shapes.multipart, positioning}
+\usetikzlibrary{decorations, calc, arrows, arrows.meta, positioning}
 
 \begin{document}
-\begin{tikzpicture}[>=Stealth,
-    node distance=0.5cm and 1.0cm,
-    list/.style={rectangle split, rectangle split parts=3, draw, rectangle split horizontal, minimum size=18pt, inner sep=5pt, text=black}
+\begin{tikzpicture}[
+    >=Stealth,
+    list/.style={rectangle, draw, inner sep=5pt, text=black}
 ]
 
-% Create the nodes
-\node[list] (A) { \nodepart{second} 3 \nodepart{third} \phantom{prev}};
-\node[list, right=of A] (B) { \nodepart{second} 7 \nodepart{third} \phantom{prev}};
-\node[list, right=of B] (C) { \nodepart{second} 5 \nodepart{third} \phantom{prev}};
+    % Nodes ------------------------------------------------------
 
-% Create the NULL nodes
-\node[left=of A] (null1) {NULL};
-\node[right=of C] (null2) {NULL};
+    \node (title) at (3,1.5) {Doubly Linked List};
+    \node[list] (n1) {a};
+    \node (start) at (0, 1) {\texttt{*head}};
+    \node[list, right=of n1] (n2) {b};
+    \node[list, right=of n2] (n3) {c};
+    \node[right=of n3] (n4) {...};
+    \node[list, right=of n4] (n5) {e};
+    \node (end) at (6.16, 1) {\texttt{*tail}};
 
-% Draw the pointers
-\draw[*->] ([xshift=-15pt]A.text) -- (null1);
-\draw[*->] (A.third) -- (B.text);
-\draw[*->] (B.third) -- (C.text);
-\draw[*->] (C.third) -- (null2);
+    % Arrows ---------------------------------------------------
 
-\draw[<-*] (A.text) -- (B.second);
-\draw[<-*] (B.text) -- (C.second);
+    % Down arrows
+    \draw [->] ($(n1.east)+(0,.1)$) -- ($(n2.west)+(0,.1)$);
+    \draw [->] ($(n2.east)+(0,.1)$) -- ($(n3.west)+(0,.1)$);
+    \draw [->] ($(n3.east)+(0,.1)$) -- ($(n4.west)+(0,.1)$);
+    \draw [->] ($(n4.east)+(0,.1)$) -- ($(n5.west)+(0,.1)$);
 
-% Draw the head pointer
-\node[below=of A, rectangle, draw, minimum size=18pt] (head) {Head};
-\draw[->] (head) -- (A);
+    % Down arrows
+    \draw [->] ($(n2.west)-(0,.1)$) -- ($(n1.east)-(0,.1)$);
+    \draw [->] ($(n3.west)-(0,.1)$) -- ($(n2.east)-(0,.1)$);
+    \draw [->] ($(n4.west)-(0,.1)$) -- ($(n3.east)-(0,.1)$);
+    \draw [->] ($(n5.west)-(0,.1)$) -- ($(n4.east)-(0,.1)$);
+
+    % Pointer labels
+    \draw [->] (end.south) -- (n5.north);
+    \draw [->] (start.south) -- (n1.north);
 
 \end{tikzpicture}
 \end{document}

@@ -343,6 +343,23 @@ vs.
 <li>Queue: dynamic set of elements, can only be read starting from most longest added element, first-in-first-out</li>
 <li>Graphs or Trees: elements have references/pointers to a variable number of other elements</li>
 </ul>
+<p>Compare and contrast the array, doubly-linked list, and the heap:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/array/array.svg" class="img-fluid figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+<p><img src="figures/list/list.svg" class="img-fluid" style="width:100.0%"></p>
+<p><img src="figures/heap/heap.svg" class="img-fluid" style="width:100.0%"></p>
+<p>The array has the property that if every element is of the same structure and takes up the same amount of memory, we can access the nth element quickly by calculating where it will be in memory and looking there. However, to update an array can be annoying because if it is growing and the neighboring memory is not free, we might have to move the whole array.</p>
+<p>The doubly-linked list facilitates things like:</p>
+<ul>
+<li>Easy insertions or deletions anywhere</li>
+<li>Quickly accessing the first and last elements</li>
+<li>Easy storage in memory since memory doesn’t need to be in one contiguous block</li>
+</ul>
+<p>But search algorithms are limited to stepping through the list until a desired element is found.</p>
+<p>On the other hand, the heap allows for intelligent searching. Of course heaps aren’t good for everything: for example, accessing the nth element would be easier in an array than in a heap.</p>
 
 
 </section>
