@@ -384,8 +384,3 @@ if __name__=="__main__":
 
 ![](figures/insertion_sort/6/6.svg){width='300px'}
 :::
-
-
-:::{.callout-tip}
-
-:::
