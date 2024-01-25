@@ -39,7 +39,7 @@ stuff. Apparently space is cheap.
 # not an algorithm
 ```
 
-```
+```python
 1. flip coin 
 2. if heads -> x 
       tails -> y
@@ -138,7 +138,7 @@ almost exponential. This doesn't go for factoring polynomials.
 When multiplying numbers, all the terms get jumbled up whereas we know where
 the pieces came from in polynomials: 
 
-```
+```python
 (123 * 827) = (1*10^2 + 2 * 10^2 + 3 * 10^0 ) * (...)
 
 vs. 
@@ -218,3 +218,174 @@ Berlekamp's algorithm
 Rotating doubly-linked list: 
 <https://tex.stackexchange.com/questions/242044/add-label-to-a-rotated-doubly-linked-list>
 
+## Day 2 
+
+We've moved classrooms to Kresge G1.  On 7th of February, and 4th of March we
+need to be in FXB G12.
+
+Last time we talked about algorithms like sorting, searching, talking about 
+their time / space complexity. 
+
+Algorithms need to have finite numbers of instructions. 
+
+Deterministic means there is no randomness.
+
+Well-definedness means that the computer knows what to do at every step. 
+
+Properties of algorithms include:
+
+  - Feasibility
+  - Termination 
+  - Deterministic
+    - The output is well-defined for every instance
+    - At any time, the next step is well-defined 
+  - Finite 
+    - The number of steps must be finite 
+    - At any time point, the required memory must be finite
+
+Today let's discuss about <u>random numbers</u>. 
+
+Motivation could include: 
+
+  1. Statistical simulation (Monte Carlo) in statistical methods research.
+  2. The statistical theories/methods are all based on assumptions. 
+  So most theorems state assumptions...
+  3. The theories can hardly be verified in real world data because 
+  (1) the real data never satisfy the assumption; and (2) the 
+  underlying truth is unknown (gold standard)
+  4. In simulation, data are created in a well controlled environment 
+  (model assumptions) and all truth are known. So 
+  the claim in the theorem can be validated and subjected to sensitivity analysis. 
+
+We often use the inverse CDF method to generate random numbers that
+are distributed a certain way.  Or importance sampling. Or metropolis-hastings.
+
+But how do we generate uniform random numbers? `runif(10)`. 
+
+  - Could it be just a list somewhere just stored
+  - It could be some highly erratic but still deterministic function. 
+
+Why are ZIP CRC Checksums related to randomness? How do those relate to random 
+numbers? 
+
+Whatever we use to produce random numbers, we can perform statistical tests on 
+the output to see if it's distinguishable from randomness. 
+
+Some good properties of a random number generator: 
+
+  - Uniformity
+  - Independence
+  - Diehard tests (They should pass "Diehard" tests, qc-tests for PRNG)
+  - Replication
+  - Cycle length - should be a long time before numbers repeat
+  - Speed (fast)
+  - Memory usage (little need)
+  - Parallel implementation (desirable for speed)
+  - Cryptographically secure: required for password storage
+
+The last point refers to the idea that there should be no 'reversal'; 
+it should not be possible to look at the random numbers generated 
+and tell what the seed is. 
+
+If we have $f: s \to [0,1]$, we want to check two things: 
+
+  1. Is the output erratic? (Crucial)
+  2. Does $f^{-1} exist? (Can it be hacked)? (Optional)
+
+### Mid-square method
+
+1. Start with a 4-digit number $z_0$, then square it. Should be an 
+8 digit number, and if not pad it.
+
+2. Deterministic sequence of numbers $e.g., $z_{n+1} = f(z_n)$. Look at 
+the middle four digits of it. Put the decimal in front. 
+
+3. Repeat
+
+We get uniform random number. 
+
+But this has problems, like two successive zeroes behind the decimal will never disappear. 
+
+### Linear Congruential Generator
+
+LCG is an algorithm that yields a sequence of pseudo-randomized 
+numbers calculated with a discontinuous piecewise linear equation. 
+They produce a sequence of integers between 0 and m-1 according to 
+$z_n = (a * z_{n-1} + c) \pmod m, \quad n = 1, 2, ...$ 
+
+where $a$ is the multiplier, $c$ is the increment, and $m$ the modulus. 
+To obtain uniform random numbers on $(0,1)$, we take 
+
+$$u_n = z_n / m.$$
+
+Good choices for $a$, $c$, and $m$ are important. 
+
+Marsaglia showed that $(z_i, z_{i+1})$ have this non-random structure. 
+
+Good question: Is there a way to determine the number of hyperplanes?
+
+The theory behind LCG is relatively easy to understand, and are easily implemented and fast, especially on computer hardware
+which can provide modulo arithmetic by stoage-bit truncation. 
+
+A linear congruential generator has full period (=cycle length m) if and only if
+
+  1. The only positive integer that divides both $m$ and $c$ is 1 (the gcd)
+  2. If $q$ is a prime number that divides $m$, then $q$ divides $a-1$; 
+  3. If 4 divides $m$, then 4 divides $a-1$. 
+
+[Marin Mersenne](https://en.wikipedia.org/wiki/Marin_Mersenne)
+
+For each Mersenne number, it's prime if and only if it does not divide the corresponding shadow sequence
+number: $S_2 = 4$, $S_n = S_{n-1}^2 - 2$. 
+
+```python
+import numpy as np
+import hashlib
+import matplotlib.pyplot as plt
+
+def hashing(s):
+	h = hashlib.md5()
+	#h = hashlib.sha256()
+	h.update(str(s).encode("utf-8"))
+	return(h.hexdigest())
+
+def random_number(seed):
+	temp = hashing(str(seed))
+	x = int(temp,16) / (16**len(temp))
+	return(x)
+
+if __name__=="__main__":
+	print(hashing("mouse"))
+	print(hashing("house"))
+	print(random_number(5))
+	# plot n numbers
+	n = 1000
+	x = np.arange(n)
+	y = np.zeros(n)
+	for i in range(n):
+		y[i] = random_number(x[i])
+	plt.plot(x,y,"+",color="black")
+	plt.show()
+```
+
+[John the Ripper](https://www.openwall.com/john/) tries to invert the MD5 hashsum. 
+
+
+:::{layout-ncol='3' layout-nrow='2'}
+![](figures/insertion_sort/1/1.svg){width='300px'}
+
+![](figures/insertion_sort/2/2.svg){width='300px'}
+
+![](figures/insertion_sort/3/3.svg){width='300px'}
+
+![](figures/insertion_sort/4/4.svg){width='350px'}
+
+![](figures/insertion_sort/5/5.svg){width='300px'}
+
+![](figures/insertion_sort/6/6.svg){width='300px'}
+:::
+
+
+:::{.callout-tip}
+
+:::

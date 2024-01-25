@@ -9,5 +9,9 @@ book:
     - index.qmd
     - week1/week1.qmd
 
-filters:
-  - pseudocode
+format:
+  html:
+    theme: style.scss
+    number-sections: false
+  pdf:
+    documentclass: scrreport

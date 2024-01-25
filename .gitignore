@@ -6,3 +6,13 @@
 /.quarto/
 slides/*
 syllabus/*
+
+**/*.log
+**/*.aux
+**/*.out
+**/*.fdb_latexmk
+**/*.fls
+**/*.synctex.gz
+
+/demos
+/demos/**

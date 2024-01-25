@@ -1,9 +1,5 @@
 ---
 title: "Data Structures (BST 234) Notes"
-format: 
-  html:
-    toc: true
-    theme: ../style.scss
 ---
 
 Building 2, room 435

@@ -122,7 +122,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-submit-button-title": "Submit"
   }
 }</script>
-<link href="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.min.css" rel="stylesheet">
 
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
@@ -134,7 +133,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Week 1: Intro</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Week 1: Intro</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -159,12 +158,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Data Structures (BST 234) Notes</span></a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Structures (BST 234) Notes</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../week1/week1.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Week 1: Intro</span></a>
+  <a href="../week1/week1.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Week 1: Intro</span></a>
   </div>
 </li>
     </ul>
@@ -176,7 +175,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section"><span class="toc-section-number">2.1</span>  </a></li>
+  <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section"></a></li>
+  <li><a href="#day-2" id="toc-day-2" class="nav-link" data-scroll-target="#day-2">Day 2</a>
+  <ul class="collapse">
+  <li><a href="#mid-square-method" id="toc-mid-square-method" class="nav-link" data-scroll-target="#mid-square-method">Mid-square method</a></li>
+  <li><a href="#linear-congruential-generator" id="toc-linear-congruential-generator" class="nav-link" data-scroll-target="#linear-congruential-generator">Linear Congruential Generator</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -185,7 +189,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Week 1: Intro</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-title">Week 1: Intro</span></h1>
 </div>
 
 
@@ -228,11 +232,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>   <span class="kw">or</span> do y </span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># not an algorithm</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<pre><code>1. flip coin 
-2. if heads -&gt; x 
-      tails -&gt; y
-
-# is an algorithm</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fl">1.</span> flip coin </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fl">2.</span> <span class="cf">if</span> heads <span class="op">-&gt;</span> x </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>      tails <span class="op">-&gt;</span> y</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># is an algorithm</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Randomness comes in different flavors:</p>
 <ul>
 <li>Quicksort is a method that always sorts, but its run-time is random.</li>
@@ -243,8 +247,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Output: Sorted sequence of input data <span class="math inline">\(\langle a_1', a_2', ..., a_n' \rangle\)</span> with <span class="math inline">\(a_1' \leq ... \leq a_n'\)</span>.</p>
 <p>A sorting algorithm <span class="math inline">\(f\)</span> solves the problem defined by the input-output relationship.</p>
 <p>There are many sorting techniques.</p>
-<section id="section" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="section"><span class="header-section-number">2.1</span> </h2>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section"></h2>
 <p>An iconic algorithm:</p>
 <div class="chilltip">
 <div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>function gcd(a,b): </span>
@@ -311,11 +315,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Factoring numbers is super-polynomial but sub-exponential. It’s like almost exponential. This doesn’t go for factoring polynomials.</p>
 <p>When multiplying numbers, all the terms get jumbled up whereas we know where the pieces came from in polynomials:</p>
-<pre><code>(123 * 827) = (1*10^2 + 2 * 10^2 + 3 * 10^0 ) * (...)
-
-vs. 
-
-(2x + 3)(x^2 + 1)</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">123</span> <span class="op">*</span> <span class="dv">827</span>) <span class="op">=</span> (<span class="dv">1</span><span class="op">*</span><span class="dv">10</span><span class="op">^</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> <span class="dv">10</span><span class="op">^</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">3</span> <span class="op">*</span> <span class="dv">10</span><span class="op">^</span><span class="dv">0</span> ) <span class="op">*</span> (...)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>vs. </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>(<span class="dv">2</span><span class="er">x</span> <span class="op">+</span> <span class="dv">3</span>)(x<span class="op">^</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="chilltip">
 <p>What do random numbers and compression have in common?</p>
 </div>
@@ -360,8 +364,166 @@ vs.
 </ul>
 <p>But search algorithms are limited to stepping through the list until a desired element is found.</p>
 <p>On the other hand, the heap allows for intelligent searching. Of course heaps aren’t good for everything: for example, accessing the nth element would be easier in an array than in a heap.</p>
+<p>References:</p>
+<p>Berlekamp’s algorithm <a href="https://en.wikipedia.org/wiki/Berlekamp%27s_algorithm" class="uri">https://en.wikipedia.org/wiki/Berlekamp%27s_algorithm</a></p>
+<p>Rotating doubly-linked list: <a href="https://tex.stackexchange.com/questions/242044/add-label-to-a-rotated-doubly-linked-list" class="uri">https://tex.stackexchange.com/questions/242044/add-label-to-a-rotated-doubly-linked-list</a></p>
+</section>
+<section id="day-2" class="level2">
+<h2 class="anchored" data-anchor-id="day-2">Day 2</h2>
+<p>We’ve moved classrooms to Kresge G1. On 7th of February, and 4th of March we need to be in FXB G12.</p>
+<p>Last time we talked about algorithms like sorting, searching, talking about their time / space complexity.</p>
+<p>Algorithms need to have finite numbers of instructions.</p>
+<p>Deterministic means there is no randomness.</p>
+<p>Well-definedness means that the computer knows what to do at every step.</p>
+<p>Properties of algorithms include:</p>
+<ul>
+<li>Feasibility</li>
+<li>Termination</li>
+<li>Deterministic
+<ul>
+<li>The output is well-defined for every instance</li>
+<li>At any time, the next step is well-defined</li>
+</ul></li>
+<li>Finite
+<ul>
+<li>The number of steps must be finite</li>
+<li>At any time point, the required memory must be finite</li>
+</ul></li>
+</ul>
+<p>Today let’s discuss about <u>random numbers</u>.</p>
+<p>Motivation could include:</p>
+<ol type="1">
+<li>Statistical simulation (Monte Carlo) in statistical methods research.</li>
+<li>The statistical theories/methods are all based on assumptions. So most theorems state assumptions…</li>
+<li>The theories can hardly be verified in real world data because</li>
+</ol>
+<ol type="1">
+<li>the real data never satisfy the assumption; and (2) the underlying truth is unknown (gold standard)</li>
+</ol>
+<ol start="4" type="1">
+<li>In simulation, data are created in a well controlled environment (model assumptions) and all truth are known. So the claim in the theorem can be validated and subjected to sensitivity analysis.</li>
+</ol>
+<p>We often use the inverse CDF method to generate random numbers that are distributed a certain way. Or importance sampling. Or metropolis-hastings.</p>
+<p>But how do we generate uniform random numbers? <code>runif(10)</code>.</p>
+<ul>
+<li>Could it be just a list somewhere just stored</li>
+<li>It could be some highly erratic but still deterministic function.</li>
+</ul>
+<p>Why are ZIP CRC Checksums related to randomness? How do those relate to random numbers?</p>
+<p>Whatever we use to produce random numbers, we can perform statistical tests on the output to see if it’s distinguishable from randomness.</p>
+<p>Some good properties of a random number generator:</p>
+<ul>
+<li>Uniformity</li>
+<li>Independence</li>
+<li>Diehard tests (They should pass “Diehard” tests, qc-tests for PRNG)</li>
+<li>Replication</li>
+<li>Cycle length - should be a long time before numbers repeat</li>
+<li>Speed (fast)</li>
+<li>Memory usage (little need)</li>
+<li>Parallel implementation (desirable for speed)</li>
+<li>Cryptographically secure: required for password storage</li>
+</ul>
+<p>The last point refers to the idea that there should be no ‘reversal’; it should not be possible to look at the random numbers generated and tell what the seed is.</p>
+<p>If we have <span class="math inline">\(f: s \to [0,1]\)</span>, we want to check two things:</p>
+<ol type="1">
+<li>Is the output erratic? (Crucial)</li>
+<li>Does $f^{-1} exist? (Can it be hacked)? (Optional)</li>
+</ol>
+<section id="mid-square-method" class="level3">
+<h3 class="anchored" data-anchor-id="mid-square-method">Mid-square method</h3>
+<ol type="1">
+<li><p>Start with a 4-digit number <span class="math inline">\(z_0\)</span>, then square it. Should be an 8 digit number, and if not pad it.</p></li>
+<li><p>Deterministic sequence of numbers $e.g., <span class="math inline">\(z_{n+1} = f(z_n)\)</span>. Look at the middle four digits of it. Put the decimal in front.</p></li>
+<li><p>Repeat</p></li>
+</ol>
+<p>We get uniform random number.</p>
+<p>But this has problems, like two successive zeroes behind the decimal will never disappear.</p>
+</section>
+<section id="linear-congruential-generator" class="level3">
+<h3 class="anchored" data-anchor-id="linear-congruential-generator">Linear Congruential Generator</h3>
+<p>LCG is an algorithm that yields a sequence of pseudo-randomized numbers calculated with a discontinuous piecewise linear equation. They produce a sequence of integers between 0 and m-1 according to <span class="math inline">\(z_n = (a * z_{n-1} + c) \pmod m, \quad n = 1, 2, ...\)</span></p>
+<p>where <span class="math inline">\(a\)</span> is the multiplier, <span class="math inline">\(c\)</span> is the increment, and <span class="math inline">\(m\)</span> the modulus. To obtain uniform random numbers on <span class="math inline">\((0,1)\)</span>, we take</p>
+<p><span class="math display">\[u_n = z_n / m.\]</span></p>
+<p>Good choices for <span class="math inline">\(a\)</span>, <span class="math inline">\(c\)</span>, and <span class="math inline">\(m\)</span> are important.</p>
+<p>Marsaglia showed that <span class="math inline">\((z_i, z_{i+1})\)</span> have this non-random structure.</p>
+<p>Good question: Is there a way to determine the number of hyperplanes?</p>
+<p>The theory behind LCG is relatively easy to understand, and are easily implemented and fast, especially on computer hardware which can provide modulo arithmetic by stoage-bit truncation.</p>
+<p>A linear congruential generator has full period (=cycle length m) if and only if</p>
+<ol type="1">
+<li>The only positive integer that divides both <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span> is 1 (the gcd)</li>
+<li>If <span class="math inline">\(q\)</span> is a prime number that divides <span class="math inline">\(m\)</span>, then <span class="math inline">\(q\)</span> divides <span class="math inline">\(a-1\)</span>;</li>
+<li>If 4 divides <span class="math inline">\(m\)</span>, then 4 divides <span class="math inline">\(a-1\)</span>.</li>
+</ol>
+<p><a href="https://en.wikipedia.org/wiki/Marin_Mersenne">Marin Mersenne</a></p>
+<p>For each Mersenne number, it’s prime if and only if it does not divide the corresponding shadow sequence number: <span class="math inline">\(S_2 = 4\)</span>, <span class="math inline">\(S_n = S_{n-1}^2 - 2\)</span>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> hashlib</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> hashing(s):</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    h <span class="op">=</span> hashlib.md5()</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">#h = hashlib.sha256()</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    h.update(<span class="bu">str</span>(s).encode(<span class="st">"utf-8"</span>))</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>(h.hexdigest())</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> random_number(seed):</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    temp <span class="op">=</span> hashing(<span class="bu">str</span>(seed))</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="bu">int</span>(temp,<span class="dv">16</span>) <span class="op">/</span> (<span class="dv">16</span><span class="op">**</span><span class="bu">len</span>(temp))</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>(x)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span><span class="op">==</span><span class="st">"__main__"</span>:</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(hashing(<span class="st">"mouse"</span>))</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(hashing(<span class="st">"house"</span>))</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(random_number(<span class="dv">5</span>))</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># plot n numbers</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> np.arange(n)</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> np.zeros(n)</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>        y[i] <span class="op">=</span> random_number(x[i])</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    plt.plot(x,y,<span class="st">"+"</span>,color<span class="op">=</span><span class="st">"black"</span>)</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><a href="https://www.openwall.com/john/">John the Ripper</a> tries to invert the MD5 hashsum.</p>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="figures/insertion_sort/1/1.svg" class="img-fluid" width="300"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="figures/insertion_sort/2/2.svg" class="img-fluid" width="300"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="figures/insertion_sort/3/3.svg" class="img-fluid" width="300"></p>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 36.8%;justify-content: center;">
+<p><img src="figures/insertion_sort/4/4.svg" class="img-fluid" width="350"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 31.6%;justify-content: center;">
+<p><img src="figures/insertion_sort/5/5.svg" class="img-fluid" width="300"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 31.6%;justify-content: center;">
+<p><img src="figures/insertion_sort/6/6.svg" class="img-fluid" width="300"></p>
+</div>
+</div>
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -501,37 +663,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../index.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Data Structures (BST 234) Notes</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Data Structures (BST 234) Notes</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
   </div>
 </nav>
 </div> <!-- /content -->
-<script src="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.min.js" type="text/javascript"></script>
-<script type="text/javascript">
-(function(d) {
-  d.querySelectorAll(".pseudocode-container").forEach(function(el) {
-    let pseudocodeOptions = {
-      indentSize: el.dataset.indentSize || "1.2em",
-      commentDelimiter: el.dataset.commentDelimiter || "//",
-      lineNumber: el.dataset.lineNumber === "true" ? true : false,
-      lineNumberPunc: el.dataset.lineNumberPunc || ":",
-      noEnd: el.dataset.noEnd === "true" ? true : false,
-      titlePrefix: el.dataset.algTitle || "Algorithm"
-    };
-    pseudocode.renderElement(el.querySelector(".pseudocode"), pseudocodeOptions);
-  });
-})(document);
-(function(d) {
-  d.querySelectorAll(".pseudocode-container").forEach(function(el) {
-    titleSpan = el.querySelector(".ps-root > .ps-algorithm > .ps-line > .ps-keyword")
-    titlePrefix = el.dataset.algTitle;
-    titleIndex = el.dataset.chapterLevel ? el.dataset.chapterLevel + "." + el.dataset.pseudocodeIndex : el.dataset.pseudocodeIndex;
-    titleSpan.innerHTML = titlePrefix + " " + titleIndex + " ";
-  });
-})(document);
-</script>
 
 
 
