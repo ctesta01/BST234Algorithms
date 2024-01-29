@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Data Structures and Algorithms (BST 234) Notes - 3&nbsp; Week 2</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../week1/week1.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<link href="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.min.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Week 2</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Data Structures and Algorithms (BST 234) Notes</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Structures (BST 234) Notes</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week1/week1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Week 1: Intro</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week2/week2.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Week 2</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#concepts-of-algorithms" id="toc-concepts-of-algorithms" class="nav-link active" data-scroll-target="#concepts-of-algorithms">Concepts of Algorithms</a></li>
+  <li><a href="#growth-of-functions-and-mathcal-o-notation" id="toc-growth-of-functions-and-mathcal-o-notation" class="nav-link" data-scroll-target="#growth-of-functions-and-mathcal-o-notation">Growth of Functions and <span class="math inline">\(\mathcal O\)</span>-notation</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-title">Week 2</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>In FXB G12 on Mondays, Kresge LL6 on Wednesdays.</p>
+<p>Next problem set covers Big-O relationships.</p>
+<p>Induction is introduced as useful for proving properties of algorithms.</p>
+<p>“Now we do my favorite thing: repetition”</p>
+<p>What did we do last Wednesday?</p>
+<ul>
+<li>Hash functions
+<ul>
+<li>A mapping from <span class="math inline">\(f: S \to \texttt{32 bit numbers}\)</span>
+<ul>
+<li>Want them to be pseudorandom (as erratic as possible)</li>
+<li>They’ll be deterministic functions</li>
+</ul></li>
+<li>We use it for generating a random number</li>
+<li>Test whether two files are the same</li>
+<li>(Optional) Does the inverse exist?</li>
+<li>In order to apply in checking if the file transferred properly, erraticness is enough. Eratic hashing is also fine for defining a hash map. But cryptographic hashsums are necessary —&nbsp;for passwords, we want security, i.e., an inability to go backwards to the original data (input to hash function).</li>
+<li>Eratic means it satisfies the properties of “a good random number generator”
+<ul>
+<li>Uniformity, independence, Diehard tests, replication, cycle length, speed, memory usage, cryptographically secure…</li>
+</ul></li>
+</ul></li>
+<li><h2 id="linear-congruential-generator" class="anchored">Linear Congruential Generator</h2></li>
+</ul>
+<p>AES: Advanced Encryption System</p>
+<p>How do we get real random numbers? We need to look for a natural process with randomness.</p>
+<p>Hold a Geiger counter against the uranium: Times between the clicks are exponentially distributed. Cosmic background radiation also works.</p>
+<section id="concepts-of-algorithms" class="level2">
+<h2 class="anchored" data-anchor-id="concepts-of-algorithms">Concepts of Algorithms</h2>
+<p>Contents:</p>
+<ul>
+<li>Concepts of algorithms: what is an algorithm? What flavors of algorithms exist?</li>
+</ul>
+<ol start="2" type="1">
+<li>Complexity in time and space</li>
+<li>Recursion</li>
+<li>Divide-and-conquer paradigm</li>
+<li>Example: Sorting algorithms</li>
+<li>Example: Traditional and fast multiplication via divide-and-conquer.</li>
+</ol>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What is an algorithm?</p>
+<p>A finite list of instructions that is well-defined. We can think of it as a function from input to output space: <span class="math inline">\(f: S \to T\)</span>.</p>
+<p>What properties do they have?</p>
+<ul>
+<li>Runtime: They can terminate after finite time, or have finite expected runtime.</li>
+<li>Complexity in time &amp; space.</li>
+<li>Algorithms can be iterative, or recursive.</li>
+</ul>
+</div>
+</div>
+<p>An <em>instance</em> of is a particular implementation of an algorithm. It should satisfy all the same properties as the original algorithm.</p>
+<p>Things to keep in mind:</p>
+<ul>
+<li>Every step must be feasible.</li>
+<li>The algorithm terminates after a finite number of steps.</li>
+<li>Determinisms</li>
+</ul>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There are two types of randomness: those that go into results, or those that don’t.</p>
+<p>Two examples:</p>
+<ul>
+<li>Drawing random numbers; MCMC</li>
+<li>Sorting numbers (random runtime)</li>
+</ul>
+</div>
+</div>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="../week1/figures/insertion_sort/1/1.svg" class="img-fluid" width="300"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="../week1/figures/insertion_sort/2/2.svg" class="img-fluid" width="300"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="../week1/figures/insertion_sort/3/3.svg" class="img-fluid" width="300"></p>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 36.8%;justify-content: center;">
+<p><img src="../week1/figures/insertion_sort/4/4.svg" class="img-fluid" width="350"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 31.6%;justify-content: center;">
+<p><img src="../week1/figures/insertion_sort/5/5.svg" class="img-fluid" width="300"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 31.6%;justify-content: center;">
+<p><img src="../week1/figures/insertion_sort/6/6.svg" class="img-fluid" width="300"></p>
+</div>
+</div>
+</div>
+<p>Let’s consider the runtime of insertion sort:</p>
+<p>In step <span class="math inline">\(i\)</span>, we look at <span class="math inline">\(n-i\)</span> values to compare.</p>
+<p><span class="math display">\[
+\sum_{i=1}^{n-1} n-i = \sum_{i=1}^{n-1} i = \frac{n(n-1)}{2} \sim n^2
+\]</span></p>
+<p><span class="math display">\[
+\sum_{i=1}^n i^2 \sim n^3
+\]</span></p>
+<p>In general, is it always one more?</p>
+<p>Yes, because we perform <span class="math inline">\(n\)</span> operations of <span class="math inline">\(i^{...}\)</span> complexity.</p>
+<p>We can use comparison of an integral to a summation</p>
+<p><span class="math display">\[
+\sum_{i=1}^\infty i^2 \leq \int_{i=1}^{\infty} i^2
+\]</span></p>
+<p>Insertion Sort(A)</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="op">&lt;-</span> <span class="dv">2</span> to length[A]</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  do key <span class="op">&lt;-</span> A[j]</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">&gt;</span> Insert A[j] into the <span class="bu">sorted</span> sequence A[<span class="fl">1.</span>.j<span class="op">-</span><span class="dv">1</span>].</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  i <span class="op">&lt;-</span> j<span class="op">-</span><span class="dv">1</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> i <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> A[i] <span class="op">&gt;</span> key</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>   do A[i<span class="op">+</span><span class="dv">1</span>]</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>     i <span class="op">&lt;-</span> i <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>   A[i<span class="op">+</span><span class="dv">1</span>] <span class="op">&lt;-</span> key</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="alg-insertionsort" class="pseudocode-container" data-comment-delimiter="//" data-line-number="true" data-indent-size="1.2em" data-no-end="false" data-line-number-punc=":" data-pseudocode-index="1" data-alg-title="Algorithm">
+<div class="pseudocode">
+\begin{algorithm} \caption{Insertion-Sort} \begin{algorithmic} \Procedure{InsertionSort}{$A$} \For{$j = p$ \To $r - 1$} \State $y \gets A[j]$ \State $\triangleright$ Insert $A[j]$ into the sorted sequence $A[1..j-1]$ \State $i \gets j-1$ \EndFor \While{$i &gt; 0$ and $A[i] &gt; key$} \State $A[i+1] \gets A[i]$ \State $i \gets i - 1$ \EndWhile \State $A[i + 1] \gets key$ \EndProcedure \end{algorithmic} \end{algorithm}
+</div>
+</div>
+<p>One way of proving correctness of a sequential algorithm consists in finding an invariant which is always true in each iteration independently of the progress of the algorithm.</p>
+<p>Here: What is the invariant statement for insertion sort? The invariant is that in iteration <code>i</code>, in the array <code>A[1..i-1]</code> are sorted.</p>
+</section>
+<section id="growth-of-functions-and-mathcal-o-notation" class="level2">
+<h2 class="anchored" data-anchor-id="growth-of-functions-and-mathcal-o-notation">Growth of Functions and <span class="math inline">\(\mathcal O\)</span>-notation</h2>
+<p>We define for functions <span class="math inline">\(f(n)\)</span> and <span class="math inline">\(g(n)\)</span>:</p>
+<ol type="1">
+<li>Asymptotically tight bound: <span class="math display">\[
+    \begin{align*}
+    \mathcal O(g(n)) &amp; = \{ f(n) :  \text{ there exist constants } c_1, c_2 &gt;
+    0 \\
+    &amp; \text{ and } n_0 \text{ such that } 0 \leq c_1 g(n) \leq f(n) \leq c_2 g(n) \forall n \geq n_0 \}
+    \end{align*}
+    \]</span></li>
+<li>Litte-o notation (convergence to zero):</li>
+</ol>
+<p><span class="math display">\[\mathcal o(g(n)) = \left\{ f(n) \colon \lim_{n\to\infty} \frac{f(n)}{g(n)} = 0\right\}\]</span></p>
+<ol start="3" type="1">
+<li>“Big-O” notation (asymptotic upper bound): <span class="math display">\[
+  \mathcal O(g(n)) = \left\{
+    \begin{align*}
+    &amp; f(n) : \text{there exists constants } c &gt; 0 \text{ and } \\
+    &amp; n_0 \text{ such that } 0 \leq f(n) \leq cg(n)
+    \forall n \geq n_0
+    \end{align*}
+    \right\}
+  \]</span></li>
+</ol>
+<div id="algif" class="pseudocode-container" data-comment-delimiter="//" data-line-number="true" data-indent-size="1.2em" data-no-end="false" data-line-number-punc=":" data-pseudocode-index="2" data-alg-title="Algorithm">
+<div class="pseudocode">
+\begin{algorithm} \caption{If-Example} \begin{algorithmic} \Procedure{If-Example}{$x$} \If{$x &lt; 100$} \State $y \gets x$ \Else \For{$i \gets 1$ \To $n$} \If{$A[i] &gt; y$} \State $y \gets A[i]$ \EndIf \EndFor \EndIf \EndProcedure \end{algorithmic} \end{algorithm}
+</div>
+</div>
+<p>Upper-triangulization (Gaussian elimination) is <span class="math inline">\(\mathcal O(n^3)\)</span>.</p>
+<p>For calculating the determinant, we can use either:</p>
+<ul>
+<li>Laplacian expansion: (use minors)
+<ul>
+<li>Which gives us <span class="math inline">\(\mathcal O(n!) \subset \mathcal O(e^n)\)</span>.</li>
+</ul></li>
+<li>Do Gaussian elimination and then multiply the diagonal: <span class="math inline">\(\mathcal O(n^3)\)</span>. So this is <span class="math inline">\(\mathcal O(n^3) + \mathcal O(n)\)</span>, which is just <span class="math inline">\(\mathcal O(n^3)\)</span>.</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../week1/week1.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Week 1: Intro</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+<script src="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+(function(d) {
+  d.querySelectorAll(".pseudocode-container").forEach(function(el) {
+    let pseudocodeOptions = {
+      indentSize: el.dataset.indentSize || "1.2em",
+      commentDelimiter: el.dataset.commentDelimiter || "//",
+      lineNumber: el.dataset.lineNumber === "true" ? true : false,
+      lineNumberPunc: el.dataset.lineNumberPunc || ":",
+      noEnd: el.dataset.noEnd === "true" ? true : false,
+      titlePrefix: el.dataset.algTitle || "Algorithm"
+    };
+    pseudocode.renderElement(el.querySelector(".pseudocode"), pseudocodeOptions);
+  });
+})(document);
+(function(d) {
+  d.querySelectorAll(".pseudocode-container").forEach(function(el) {
+    titleSpan = el.querySelector(".ps-root > .ps-algorithm > .ps-line > .ps-keyword")
+    titlePrefix = el.dataset.algTitle;
+    titleIndex = el.dataset.chapterLevel ? el.dataset.chapterLevel + "." + el.dataset.pseudocodeIndex : el.dataset.pseudocodeIndex;
+    titleSpan.innerHTML = titlePrefix + " " + titleIndex + " ";
+  });
+})(document);
+</script>
+
+
+
+</body></html>

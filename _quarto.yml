@@ -8,6 +8,7 @@ book:
   chapters:
     - index.qmd
     - week1/week1.qmd
+    - week2/week2.qmd
 
 format:
   html:
@@ -15,3 +16,6 @@ format:
     number-sections: false
   pdf:
     documentclass: scrreport
+
+filters:
+  - pseudocode
