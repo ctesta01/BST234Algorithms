@@ -1,0 +1,24 @@
+\documentclass[
+%% TIKZ_CLASSOPTION %%
+tikz
+]{standalone}
+\usepackage{amsmath}
+\usetikzlibrary{matrix}
+%% EXTRA_TIKZ_PREAMBLE_CODE %%
+\begin{document}
+%% TIKZ_CODE %%
+\begin{tikzpicture}[scale=2]
+  \node [shape=ellipse, minimum width = 18pt] {1}
+    child {node {2}
+      child {node {4}}
+      child {node {5}}
+    }
+    child {node {3}
+      child {node {6}}
+      child {node {7}
+        child {node {8}}
+        child {node {9}}
+        }
+    };
+\end{tikzpicture}
+\end{document}

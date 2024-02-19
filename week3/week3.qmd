@@ -1,0 +1,222 @@
+---
+title: Week 3
+---
+
+```python
+import numpy as np 
+
+x = [1,2,3,4]
+
+def merge(x,y):
+  i = 0
+  j = 0
+  z = []
+  while (i < len(x) and j < len(y)):
+    if (i == len(x)):
+      z.append(y[j])
+      j = j + 1
+      print(z)
+    elif (j == len(y)):
+      z.append(x[i])
+      i = i + 1 
+    elif (x[i] < y[j]):
+      z.append(x[i])
+      i = i + 1
+    else:
+      z.append(y[j])
+      j = j + 1
+  return z
+```
+```python
+def merge2(x, y):
+  px = 0
+  py = 0
+  z = np.zeros(x.size + y.size, dtype=int)
+
+  for i in range(len(z)):
+    if px<len(x) and py<len(y):
+      if x[px] <= y[py]:
+        z[i] = x[px]
+        px = px+1
+      else:
+        z[i] = y[py]
+        py = py+1 
+    elif px==len(x):
+      z[i] = y[py]
+      py = py+1
+    elif py==len(y):
+      z[i] = x[px]
+      px = px+1
+  return(z)
+
+def mergesort(x):
+  if len(x) == 1:
+    return(x)
+  else:
+    mid = len(x)//2
+    s1 = mergesort(x[:mid])
+    s2 = mergesort(x[mid:])
+    return(merge2(s1, s2))
+
+n = 10
+x = np.random.randint(100,size=n)      
+y = np.random.randint(100,size=n)      
+x = np.sort(x)
+y = np.sort(y)
+merge2(x,y)
+
+mergesort(x)
+```
+
+Example cpp code for merge sort
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+vector<int> merge(vector<int> x, vector<int> y){
+  int i = 0;
+  int j = 0;
+  vector<int> z;
+  while (i < x.size() && j < y.size()){
+    if (x[i] < y[j]){
+      z.push_back(x[i]);
+      i++;
+    }
+    else{
+      z.push_back(y[j]);
+      j++;
+    }
+  }
+  while (i < x.size()){
+    z.push_back(x[i]);
+    i++;
+  }
+  while (j < y.size()){
+    z.push_back(y[j]);
+    j++;
+  }
+  return z;
+}
+```
+
+Demo of how to run code in Rcpp 
+
+```{r}
+library(Rcpp)
+cppFunction('
+  std::vector<int> merge(std::vector<int> x, std::vector<int> y){
+    int i = 0;
+    int j = 0;
+    std::vector<int> z;
+    while (i < x.size() && j < y.size()){
+      if (x[i] < y[j]){
+        z.push_back(x[i]);
+        i++;
+      }
+      else{
+        z.push_back(y[j]);
+        j++;
+      }
+    }
+    while (i < x.size()){
+      z.push_back(x[i]);
+      i++;
+    }
+    while (j < y.size()){
+      z.push_back(y[j]);
+      j++;
+    }
+    return z;
+  }
+')
+x <- c(1,2,3,4)
+y <- c(2,3,4,5)
+merge(x,y)
+```
+
+Examples of the data structures we're interested in include: 
+
+  - Array 
+  - Linked List 
+  - Stack (LIFO)
+  - Queue (FIFO)
+  - Graphs or Trees
+
+```cpp
+// struct link
+// {
+//   link* next;
+//   int data;
+// };
+
+struct link
+{
+  link* next;
+  int data;
+  link(int a_data, link* a_next = 0): next(a_next), data(a_data) {}
+};
+
+link* small_primes = new link(2, new link(3, new link(5, new link(7))));
+
+// or 
+// 
+template<typename T> struct link
+{
+  link* next;
+  T data;
+  link(T a_data, link* a_next = 0): next(a_next), data(a_data) {}
+};
+```
+
+```python
+import numpy as np 
+
+class Node: 
+  def __init__(self, data=None): 
+    self.value = data
+    self.next = None
+
+x = np.random.randint(100,size=10)
+print(x)
+
+start = Node(data = x[0])
+
+prev = start
+for i in range(1, x.size):
+  temp = Node(x[i])
+  prev.next = temp
+  prev = temp
+
+print(start.value)
+print(start.next.value)
+
+while True:
+  print(start.value)
+  if start.next == None:
+    break
+  start = start.next
+```
+
+```python
+import numpy as np 
+
+class Node: 
+  def __init__(self, data=None): 
+    self.value = data
+    self.left = None
+    self.right = None
+
+def valsToTree(l):
+  newnode = Node()
+  newnode.value = l[0]
+  l = l[1:]
+  if len(l) == 1:
+    newnode.left = Node(l)
+  elif len(l) > 1:
+    mid = len(l)//2
+    newnode.left = valsToTree(l[:mid])
+    newnode.right = valsToTree(l[mid:])
+  return newnode
+```

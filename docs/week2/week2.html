@@ -93,6 +93,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../week3/week3.html" rel="next">
 <link href="../week1/week1.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -172,6 +173,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="../week2/week2.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Week 2</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week3/week3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Week 3</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week4/week4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Week 4</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -183,6 +194,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul>
   <li><a href="#concepts-of-algorithms" id="toc-concepts-of-algorithms" class="nav-link active" data-scroll-target="#concepts-of-algorithms">Concepts of Algorithms</a></li>
   <li><a href="#growth-of-functions-and-mathcal-o-notation" id="toc-growth-of-functions-and-mathcal-o-notation" class="nav-link" data-scroll-target="#growth-of-functions-and-mathcal-o-notation">Growth of Functions and <span class="math inline">\(\mathcal O\)</span>-notation</a></li>
+  <li><a href="#wednesday" id="toc-wednesday" class="nav-link" data-scroll-target="#wednesday">Wednesday</a>
+  <ul class="collapse">
+  <li><a href="#recursion" id="toc-recursion" class="nav-link" data-scroll-target="#recursion">Recursion</a></li>
+  <li><a href="#merge-sort" id="toc-merge-sort" class="nav-link" data-scroll-target="#merge-sort">Merge-Sort</a></li>
+  <li><a href="#multiplication" id="toc-multiplication" class="nav-link" data-scroll-target="#multiplication">Multiplication</a></li>
+  </ul></li>
+  <li><a href="#at-home" id="toc-at-home" class="nav-link" data-scroll-target="#at-home">At Home</a></li>
   </ul>
 </nav>
     </div>
@@ -339,7 +357,7 @@ Tip
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>   do A[i<span class="op">+</span><span class="dv">1</span>]</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>     i <span class="op">&lt;-</span> i <span class="op">-</span> <span class="dv">1</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>   A[i<span class="op">+</span><span class="dv">1</span>] <span class="op">&lt;-</span> key</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="alg-insertionsort" class="pseudocode-container" data-comment-delimiter="//" data-line-number="true" data-indent-size="1.2em" data-no-end="false" data-line-number-punc=":" data-pseudocode-index="1" data-alg-title="Algorithm">
+<div id="alg-insertionsort" class="pseudocode-container" data-no-end="false" data-indent-size="1.2em" data-line-number="true" data-comment-delimiter="//" data-line-number-punc=":" data-pseudocode-index="1" data-alg-title="Algorithm">
 <div class="pseudocode">
 \begin{algorithm} \caption{Insertion-Sort} \begin{algorithmic} \Procedure{InsertionSort}{$A$} \For{$j = p$ \To $r - 1$} \State $y \gets A[j]$ \State $\triangleright$ Insert $A[j]$ into the sorted sequence $A[1..j-1]$ \State $i \gets j-1$ \EndFor \While{$i &gt; 0$ and $A[i] &gt; key$} \State $A[i+1] \gets A[i]$ \State $i \gets i - 1$ \EndWhile \State $A[i + 1] \gets key$ \EndProcedure \end{algorithmic} \end{algorithm}
 </div>
@@ -372,7 +390,7 @@ Tip
     \right\}
   \]</span></li>
 </ol>
-<div id="algif" class="pseudocode-container" data-comment-delimiter="//" data-line-number="true" data-indent-size="1.2em" data-no-end="false" data-line-number-punc=":" data-pseudocode-index="2" data-alg-title="Algorithm">
+<div id="algif" class="pseudocode-container" data-no-end="false" data-indent-size="1.2em" data-line-number="true" data-comment-delimiter="//" data-line-number-punc=":" data-pseudocode-index="2" data-alg-title="Algorithm">
 <div class="pseudocode">
 \begin{algorithm} \caption{If-Example} \begin{algorithmic} \Procedure{If-Example}{$x$} \If{$x &lt; 100$} \State $y \gets x$ \Else \For{$i \gets 1$ \To $n$} \If{$A[i] &gt; y$} \State $y \gets A[i]$ \EndIf \EndFor \EndIf \EndProcedure \end{algorithmic} \end{algorithm}
 </div>
@@ -385,6 +403,183 @@ Tip
 <li>Which gives us <span class="math inline">\(\mathcal O(n!) \subset \mathcal O(e^n)\)</span>.</li>
 </ul></li>
 <li>Do Gaussian elimination and then multiply the diagonal: <span class="math inline">\(\mathcal O(n^3)\)</span>. So this is <span class="math inline">\(\mathcal O(n^3) + \mathcal O(n)\)</span>, which is just <span class="math inline">\(\mathcal O(n^3)\)</span>.</li>
+</ul>
+</section>
+<section id="wednesday" class="level2">
+<h2 class="anchored" data-anchor-id="wednesday">Wednesday</h2>
+<p>P Set principles: Practice <span class="math inline">\(\mathcal O\)</span> notation, mathematical relations, induction, and a simple algorithm to analyze.</p>
+<p>Last time, we did insertion sort.</p>
+<section id="recursion" class="level3">
+<h3 class="anchored" data-anchor-id="recursion">Recursion</h3>
+<p>A recursive algorithm is an algorithm which calls itself with ”smaller (or simpler)” input values.</p>
+<p>A sequential algorithm example:</p>
+<div class="grid">
+<div class="g-col-6">
+<div class="pseudocode-container" data-pseudocode-index="3" data-alg-title="Algorithm">
+<div class="pseudocode">
+\begin{algorithm} \caption{Sequential-Example} \begin{algorithmic} \Procedure{Sequential-Example}{} \State{res $\gets$ 1} \For{$i = 1$ \To $n$} \State res = res $\cdot \; i$ \EndFor \State \textbf{return} res; \EndProcedure \end{algorithmic} \end{algorithm}
+</div>
+</div>
+</div>
+</div>
+<div class="grid">
+<div class="g-col-6">
+<div class="pseudocode-container" data-pseudocode-index="4" data-alg-title="Algorithm">
+<div class="pseudocode">
+\begin{algorithm} \caption{Factorial} \begin{algorithmic} \Procedure{factorial}{n} \If{$n = 1$} \Return 1 \Else \Return {$n \; \cdot \;$ \textsc{factorial} $(n-1)$} \EndIf \EndProcedure \end{algorithmic} \end{algorithm}
+</div>
+</div>
+</div>
+</div>
+<p>An example of a problem not amenable to divide-and-conquer is the traveling salesman problem. If we calculate the optimal route over half the problem, it’s not known how to combine sub-solutions.</p>
+<p><a href="https://webgol.dinfo.unifi.it/OptimizationModels/TravelingSalesPerson.html" class="uri">https://webgol.dinfo.unifi.it/OptimizationModels/TravelingSalesPerson.html</a></p>
+<p>To use divide-and-conquer we have to be in a situation where we can</p>
+<ul>
+<li>Divide</li>
+<li>Conquer</li>
+<li>Combine</li>
+</ul>
+</section>
+<section id="merge-sort" class="level3">
+<h3 class="anchored" data-anchor-id="merge-sort">Merge-Sort</h3>
+<p>The crux is that we can combine two sorted lists in linear time.</p>
+<p>Just combining is <span class="math inline">\(\mathcal O(n)\)</span>.</p>
+<div class="pseudocode-container" data-pseudocode-index="5" data-alg-title="Algorithm">
+<div class="pseudocode">
+\begin{algorithm} \caption{Merge} \begin{algorithmic} \Procedure{Merge}{$a_1, a_2$} \State $i \gets 1$ \State $j \gets 1$ \State $k \gets 1$ \State $c \gets $ \textsc{Array}($n$) \While{$i,j &lt; n$} \If{$a_{1i} \leq a_{2j}$} \State $c_k \gets a_{1i}$ \State $i \gets i +1$ \Else \State $c_k \gets a_{2j}$ \State $j \gets j + 1$ \EndIf \State $k \gets k + 1$ \EndWhile \Return $c$ \EndProcedure \end{algorithmic} \end{algorithm}
+</div>
+</div>
+<div class="pseudocode-container" data-pseudocode-index="6" data-alg-title="Algorithm">
+<div class="pseudocode">
+\begin{algorithm} \caption{MergeSort} \begin{algorithmic} \Procedure{MergeSort}{$a$} \State $A_1 \gets$ \textsc{HalfOf}$(A)$ \State $A_2 \gets$ \textsc{TheOtherHalf}$(A)$ \State $S_1 \gets$ \textsc{MergeSort}$(A_1)$ \State $S_2 \gets$ \textsc{MergeSort}$(A_2)$ \Return \textsc{Merge}$(S_1, S_2)$ \EndProcedure \end{algorithmic} \end{algorithm}
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode tikz code-with-copy"><code class="sourceCode latex"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">\usetikzlibrary</span>{decorations, calc, arrows, arrows.meta, positioning}</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">tikzpicture</span>}[</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  scale=4,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  array/.style={rectangle, draw, inner sep=5pt, text=black, minimum width = 20pt, minimum height = 20pt}</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  ]</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">% Nodes --- </span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">\node</span>[array] (n11) {38};</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">\node</span>[array, right=0cm of n11] (n12) {27};</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">\node</span>[array, right=0cm of n12] (n13) {43};</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">\node</span>[array, right=0cm of n13] (n14) {3};</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">\node</span>[array, right=0cm of n14] (n15) {9};</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">\node</span>[array, right=0cm of n15] (n16) {82};</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">\node</span>[array, right=0cm of n16] (n17) {10};</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">\node</span>[array, below left=.5cm of n11] (n21) {38};</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">\node</span>[array, right=0cm of n21] (n22) {27};</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">\node</span>[array, right=0cm of n22] (n23) {43};</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">\node</span>[array, right=0cm of n23] (n24) {3};</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">\node</span>[array, right=2cm of n24] (n25) {9};</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">\node</span>[array, right=0cm of n25] (n26) {82};</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">\node</span>[array, right=0cm of n26] (n27) {10};</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">tikzpicture</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="week2_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" style="width:50.0%"></p>
+</div>
+</div>
+<!--
+
+  \While{$i, j < n$}
+    % \If{$a_{1i} \leq a_{2j}$}
+    % \ElseIf
+    %   \State $c_k \gets a_{2j}$, $j \gets j + 1$
+    % \EndIf
+    \State $k \gets k + 1$
+  \EndWhile
+-->
+<!-- 
+  \State $i \gets 1$, $j \gets 1$
+  \While{$i, j < $ \textsc{Length}(a_1)}
+  \EndWhile
+-->
+<pre><code>1. Divide A into A_1, A_2
+2. S_1 = MergeSort(A_1)
+   S_2 = MergeSort(A_2)
+3. S = MergeSort(S_1, S_2)</code></pre>
+<p>The complexity of <span class="math inline">\(\texttt{MergeSort}\)</span> on <span class="math inline">\(n\)</span> variables is <span class="math inline">\(\mathcal O(2 T(\frac{n}{2}) + n)\)</span> where <span class="math inline">\(T(n/2)\)</span> is the time complexity of <span class="math inline">\(\texttt{MergeSort}\)</span> on <span class="math inline">\(n/2\)</span> variables.</p>
+<p>So <span class="math inline">\(\mathcal O(\texttt{MergeSort}) = 2 [ 2 T(n/4) + n/2] + n\)</span>…</p>
+<p><span class="math display">\[ = 2^2 T(n / 2^2) + 2n\]</span></p>
+<p><span class="math display">\[ ... \]</span></p>
+<p><span class="math display">\[ = 2^{\log_2{n}} \cdot T(1) + \log_2(n) n\]</span></p>
+<p><span class="math display">\[ T(n) = n + n \cdot \log_2(n) \in \mathcal O(n \log_2(n))\]</span></p>
+<p>For divide-and-conquer problems, we have time complexity given by</p>
+<ul>
+<li>how many sub-problems we divide into</li>
+<li>size of sub-problems</li>
+<li>effort to marshall the sub-problems (combine)</li>
+</ul>
+<p><span class="math display">\[T(n) = a \cdot T(\frac{n}{b}) + n^c.\]</span></p>
+<p>Now we prefer to have <span class="math inline">\(a\)</span> small, <span class="math inline">\(b\)</span> big, and <span class="math inline">\(c\)</span> small.</p>
+<p>The Master theorem yields asymptotically tight bounds to recurrences from divide and conquer algorithms that partition an input into smaller subproblems of equal sizes.</p>
+<p>The crucial element is thus: what is the (log) ratio of the number of new subproblems to the size of new subproblems. I.e., <span class="math inline">\(\log_b(a)\)</span>, the critical exponent.</p>
+<p><strong>Theorem</strong> (Master Theorem). Let the runtime of an algorithm be given as</p>
+<p><span class="math display">\[T(n) = a T(\frac{b}{n}) + f(n)\]</span></p>
+<p>and let the critical exponent be</p>
+<p><span class="math display">\[c_{\text{crit}} = \log_b(a) = \log(\text{n of subproblems})/\log(\text{subproblem size}).\]</span></p>
+<p>Then we have three cases:</p>
+<ol type="1">
+<li><p>If <span class="math inline">\(f(n) = \mathcal O(n^c)\)</span> for some <span class="math inline">\(c &lt; c_{\text{crit}}\)</span> then <span class="math inline">\(T(n) = \Theta(n^{c_{\text{crit}}})\)</span>.</p></li>
+<li><p>If <span class="math inline">\(f(n) = \Theta(n^{c_{\text{crit}}} \log^k n)\)</span> then <span class="math inline">\(T(n) = \Theta(n^{c_{\text{crit}}} \log^{k+1} n).\)</span></p></li>
+<li><p>If <span class="math inline">\(f(n) = \Omega(n^c)\)</span> for some <span class="math inline">\(c &gt; c_{\text{crit}}\)</span> then no definite statement can be made yet. However, if <span class="math inline">\(a \cdot f(n/b) \leq k \cdot f(n)\)</span> for some <span class="math inline">\(k &lt; 1\)</span> and large enough <span class="math inline">\(n\)</span> then <span class="math inline">\(T(n) = \Theta(f(n)).\)</span></p></li>
+</ol>
+<p>1 corresponds to work splitting and recombining a problem being dominated by work on subproblems.</p>
+<p>2 corresponds to work to split/recombin a problem being comparable to work on subproblems.</p>
+<p>3 is whre work to split/recombine a problem dominates subproblems.</p>
+<p>The runtime of MergeSort can be expressed as <span class="math display">\[T(n) = 2 T\left(\frac{n}{2}\right) + n\]</span></p>
+<p>Therefore <span class="math inline">\(a = b = 2\)</span> and <span class="math inline">\(f(n) = n\)</span>.</p>
+<p>The critical exponent is <span class="math inline">\(c_{\text{crit}} = \log_b(a) = 1\)</span>.</p>
+<p>Case 2 applies since <span class="math inline">\(f(n) = \Omega(n)\)</span> with <span class="math inline">\(k = 0\)</span>.</p>
+<p>Therefore the runtime is</p>
+<p><span class="math display">\[T(n) = \Omega(n^{c_{\text{crit}}} \log^{k+1}n) = \Theta (n \log n).\]</span></p>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Remember that <span class="math display">\[n \log_3(n) = \frac{\log_2(n)}{\log_2(3)},\]</span> so it doesn’t matter which base of the <span class="math inline">\(\log\)</span> we use in <span class="math inline">\(\mathcal O\)</span> notation.</p>
+</div>
+</div>
+</section>
+<section id="multiplication" class="level3">
+<h3 class="anchored" data-anchor-id="multiplication">Multiplication</h3>
+<p>Instead of writing <code>3456 * 8957</code> in our standard long-form multiplication, we can use divide-and-conquer:</p>
+<p><span class="math display">\[=(34*89*10^4) + (34*57*10^2) + (56*89*10^2) + 56*57\]</span></p>
+<p><span class="math display">\[T(n) = 4 \cdot T(\frac{n}{2}) + n\]</span></p>
+<pre><code>3456 * 8957
+34|56 * 89|57
+
+= (34 * 10^2 + 56) * (89 * 10^2 + 57)
+
+(34 + 56)(89 + 57)
+= 34*89 + 34*57 + 56*89 + 56*57
+
+T(n) = 3 T(n/2) + n
+c_{\text{crit}} = \log_2(3) = 1.6
+O(n^{1.6})</code></pre>
+</section>
+</section>
+<section id="at-home" class="level2">
+<h2 class="anchored" data-anchor-id="at-home">At Home</h2>
+<ul>
+<li>https://en.wikipedia.org/wiki/Master_theorem_(analysis_of_algorithms)</li>
+<li>https://en.wikipedia.org/wiki/Big_O_notation</li>
+<li>https://en.wikipedia.org/wiki/Multiplication_algorithm#Long_multiplication</li>
+<li>https://web.stanford.edu/class/archive/cs/cs161/cs161.1168/lecture3.pdf</li>
+<li>https://www.geeksforgeeks.org/advanced-master-theorem-for-divide-and-conquer-recurrences/</li>
+<li>https://www.tutorialspoint.com/design_and_analysis_of_algorithms/design_and_analysis_of_algorithms_masters_theorem.htm</li>
 </ul>
 
 
@@ -531,6 +726,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../week3/week3.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-title">Week 3</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
