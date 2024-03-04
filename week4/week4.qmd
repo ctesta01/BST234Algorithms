@@ -431,3 +431,10 @@ Two activities are compatible if their intervals do not overlap.
 
 Activity selection: select maximal number of compatible activities. 
 
+Roadmap: 
+
+  - Formulate dynamic programming solution 
+  - Consider choices to determine subproblems 
+  - Realize we only need to consider the greedy choice 
+  - Arrive at a recursive greedy algorithm 
+

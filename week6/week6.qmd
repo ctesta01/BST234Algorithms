@@ -1,0 +1,169 @@
+---
+title: Week 6
+---
+
+Review: 
+
+Last times we hit on the knapsack problem, the 0-1 knapsack problem, 
+and the fractional knapsack problem. 
+
+Counting Sort: 
+
+As we read the data in a first pass, we can tally in a table how 
+frequently each value occurs. Then we go through the table from the 
+start and write the value the number of times it occurs.
+
+The problem is that this has time-complexity $\mathcal O(n R)$, 
+where $R$ is the range of the data. 
+
+| 5   | 3   | 2   | 2   | 77  |
+| --- | --- | --- | --- | --- |
+|     |     |     |     |     |
+
+Into 
+
+| x   | t   |
+| --- | --- |
+| 1   | 0   |
+| 2   | 2   |
+| 3   | 1   |
+| 4   | 0   |
+| 5   | 1   |
+| ... | ... |
+
+Dynamic Programming and Optimal Substructure
+
+Optimal substructure: 
+
+  - If the shortest path from A to B goes through C, then the shortest 
+  path from A to C and C to B is the shortest path from A to B.
+
+### Djikstra's Algorithm 
+
+If $Z$ is a vertex on the shortest path $p$ from A to F then the 
+optimal path from A to Z and from Z to F must be contained in $p$. 
+
+Dynamic programming formulation: 
+$$d(x,y) = \min_{z \in V} \{ d(x, z) + d(z, y)\},$$
+where $d(\cdot, \cdot)$ is the shortest distance between two nodes.
+
+## Parallel Programming
+
+- Easy examples with cluster computing, slurm jobs... 
+
+- I am reminded of <http://srmcse.weebly.com/uploads/8/9/0/9/8909020/introduction_to_parallel_computing_second_edition-ananth_grama..pdf>
+
+Threading in Python
+
+- <https://realpython.com/intro-to-python-threading/>
+- <https://www.geeksforgeeks.org/multithreading-python-set-1/>
+- <https://stackoverflow.com/questions/31340/how-do-threads-work-in-python-and-what-are-common-python-threading-specific-pit>
+
+Distributed Computing over Donated Compute Time: 
+
+- <https://www.mersenne.org/>
+- <https://www.pennmedicine.org/news/news-blog/2023/may/folding-at-home>
+
+I wonder how OpenMPI in R works...
+<http://webhome.auburn.edu/~zengpen/tutorials/openMPI_with_R.pdf>
+
+Numerical estimation of the heat equation...
+
+# P and NP 
+
+**P:** The class of all problems solvable in polynomial time i.e.,
+$O(n^k)$ for a fixed $k$. 
+
+**NP:** NP is the set of decision problems for which the 
+problem instances, where the answer is yes, have proofs 
+verifiable in polynomial time by a deterministic Turing
+machine, or alternatively the set of problems that can be solved in 
+polynomial time by a nondeterministic Turing machine. 
+
+[![](https://upload.wikimedia.org/wikipedia/commons/a/a0/P_np_np-complete_np-hard.svg){width='50%' fig-align='center'}](https://en.wikipedia.org/wiki/NP_%28complexity%29)
+
+Three classes of problems: 
+
+  - $P$: Problems solvable in polynomial time 
+  - $NP$: Problems verifiable in polynomial time
+  - $NPC$: Problems in NP and as hard as any problem in NP.
+    - **NP-Complete:** Decision problem (is $s \in L?$)
+    - **NP-Hard:** Function problems (How many $x \in L$?)
+
+Examples of polynomial problems: 
+
+  - Shortest path, Scheduling, Sorting, Spanning, Max Flow Computations
+
+```{r}
+#| fig.align: center
+#| engine: tikz
+#| out.width: 50%
+\begin{tikzpicture}[scale=2,
+  font = \sffamily,
+  every node/.style = {
+    draw = black, 
+    circle, 
+    inner sep = 3pt,
+    }]
+
+\node [draw = red] (1) at (1.735, 0.634) {1};
+\node [draw = red] (2) at (1.361, 0.293) {2};
+\node (3) at (0.795, 0.235) {3};
+\node (4) at (0.700, 0.736) {4};
+\node [draw = red] (5) at (1.273, 0.806) {5};
+\node (6) at (0.277, 1.003) {6};
+
+\draw (1) -- (2);
+\draw (1) -- (5);
+\draw (2) -- (5);
+\draw (2) -- (3);
+\draw (3) -- (4);
+\draw (4) -- (5);
+\draw (4) -- (6);
+
+\end{tikzpicture}
+```
+
+Now we consider the *maximum clique problem*[^1]. One approach is to use *branch and bound*[^2]. 
+
+If we do a fast-and-dirty coloring of a graph
+(just some coloring heuristic) $\to$, then 
+how many colors do we need?  At least as many colors as there are nodes in the maximum clique. 
+
+We call a graph's chromatic number $\chi_G$,
+and the maximum clique size $\omega_G$, so 
+we find that 
+$$\chi_G \geq \omega_G,$$
+
+so any heuristic $H$ for the chromatic number of the graph yields that $H \geq \chi_G \geq \omega_G$. 
+
+![](vertex_splitting_new.svg){fig-align='center' width='75%'}
+
+Next we talked about graph partitioning[^3]. Then number partitioning[^4], which has been called the easiest of all hard problems. Another one is *minimum vertex cover*[^5].
+
+[![](https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Hamiltonian_platonic_graphs.svg/480px-Hamiltonian_platonic_graphs.svg.png){width='60%' fig-align="center"}](https://en.wikipedia.org/wiki/Hamiltonian_path)
+
+Georg's favorite problem is the traveling salesman problem (TSP), as always. The TSP admits a heuristic solution via computing a minimal spanning tree (MST) and applying the triangle inequality if the weights on the graph represent a metric, see Christofides algorithm[^6].
+
+Georg's work on QUBO for maximum clique [@chapuis_finding_2019].
+
+Lucas 2014 showed that many NP-hard problems can be expressed as 
+QUBO [@lucas_2014]. 
+
+Now we've introduced using penalties[^7] to turn constrained 
+optimization into unconstrained optimization.
+
+
+[^1]: <https://en.wikipedia.org/wiki/Clique_problem>
+
+[^2]: <https://en.wikipedia.org/wiki/Branch_and_bound>
+
+[^3]: <https://en.wikipedia.org/wiki/Graph_partition>
+
+[^4]: <https://en.wikipedia.org/wiki/Partition_problem>
+
+[^5]: <https://en.wikipedia.org/wiki/Vertex_cover>
+
+[^6]: <https://en.wikipedia.org/wiki/Christofides_algorithm>
+
+[^7]: <https://en.wikipedia.org/wiki/Penalty_method>

@@ -6,6 +6,8 @@
 /.quarto/
 slides/*
 syllabus/*
+homework
+readings
 
 **/*.log
 **/*.aux
@@ -16,3 +18,5 @@ syllabus/*
 
 /demos
 /demos/**
+
+homework

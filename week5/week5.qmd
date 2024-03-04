@@ -1,0 +1,161 @@
+---
+title: Week 5
+--- 
+
+Review of topics: 
+
+  - [Karatsuba's Trick](https://en.wikipedia.org/wiki/Karatsuba_algorithm)
+  - [Merge Sort](https://en.wikipedia.org/wiki/Merge_sort)
+  - [Heap Sort](https://en.wikipedia.org/wiki/Heapsort)
+  - [Quick Sort](https://en.wikipedia.org/wiki/Quicksort)
+  - [Prim's Algorithm](https://en.wikipedia.org/wiki/Prim%27s_algorithm)
+  - [Kruskal's algorithm](https://en.wikipedia.org/wiki/Kruskal%27s_algorithm)
+  - [Floyd's Cycle Detection Algorithm](https://en.m.wikipedia.org/wiki/Cycle_detection#)
+  - [Greedy Algorithms](https://en.wikipedia.org/wiki/Greedy_algorithm)
+  - [Dynamic Programming](https://en.wikipedia.org/wiki/Dynamic_programming)
+  - [Dijkstra's Algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm) [2](https://www.freecodecamp.org/news/dijkstras-shortest-path-algorithm-visual-introduction/)
+  - [Bellman-Ford Algorithm](https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm), [2](https://www.geeksforgeeks.org/bellman-ford-algorithm-dp-23/)
+  - [Activity Selection](https://en.wikipedia.org/wiki/Activity_selection_problem)
+    - Optimal Substructure
+
+### Karatsuba's Trick 
+
+```{r}
+# R code to implement Karatsuba's trick
+karatsuba <- function(x, y) {
+  if (x < 10 || y < 10) {
+    return(x * y)
+  }
+  
+  n <- max(nchar(x), nchar(y))
+  m <- n %/% 2
+  
+  a <- x %/% 10^m
+  b <- x %% 10^m
+  c <- y %/% 10^m
+  d <- y %% 10^m
+  
+  ac <- karatsuba(a, c)
+  bd <- karatsuba(b, d)
+  ad_bc <- karatsuba(a + b, c + d) - ac - bd
+  
+  return(ac * 10^(2 * m) + ad_bc * 10^m + bd)
+}
+```
+
+### Kruskal's Algorithm 
+
+```{r}
+#| eval: false
+# R code to implement Kruskal's algorithm
+
+# set up the data
+vertices <- c('a', 'b', 'c', 'd', 'e', 'f', 'g')
+
+edges <- list(
+  c('a', 'b', 4),
+  c('a', 'c', 3),
+  c('b', 'c', 2),
+  c('b', 'd', 3),
+  c('c', 'd', 5),
+  c('c', 'e', 4),
+  c('d', 'e', 1),
+  c('d', 'f', 6),
+  c('e', 'f', 7),
+  c('e', 'g', 5),
+  c('f', 'g', 8)
+)
+
+edges_df <- data.frame(do.call(rbind, edges))
+colnames(edges_df) <- c('v1', 'v2', 'weight')
+edges_df$weight <- as.numeric(as.character(edges_df$weight))
+
+# sort the edges
+edges_df <- edges_df[order(edges_df$weight),]
+
+# initialize the forest
+forest <- data.frame(v1 = c(), v2 = c(), weight = c())
+
+# function to check for cycles
+check_if_introduces_cycle <- function(forest, new_edge) {
+  if (nrow(forest) == 0) {
+    return(FALSE)
+  }
+  # g <- graph_from_data_frame(rbind(forest, new_edge), directed = FALSE)
+
+  unionfind 
+  # return(has_eulerian_path(g))
+}
+
+# loop through candidates for edges to construct MST
+for (i in 1:nrow(edges_df)) {
+  if (
+    (! edges_df[[i,'v1']] %in% c(forest$v1, forest$v2) ||
+    ! edges_df[[i,'v2']] %in% c(forest$v1, forest$v2)) && 
+    # check for cycles 
+    ! check_if_introduces_cycle(forest, edges_df[i,])
+    ) {
+    forest <- rbind(forest, edges_df[i,])
+  }
+}
+
+forest
+
+# visualize 
+library(igraph)
+g <- graph_from_data_frame(edges_df, directed = FALSE)
+l <- layout.reingold.tilford(g)
+plot(g, edge.label = edges_df$weight, layout = l)
+
+f <- graph_from_data_frame(forest, directed = FALSE)
+plot(f, edge.label = forest$weight, layout = l)
+```
+
+### Activity Selection Problem 
+
+```
+Sort the activities by finish time. 
+Schedule the first activity in that ordering.
+Then schedule the next activity which starts after the 
+previous activity finishes. 
+Repeat until no more candidate activity exists. 
+```
+
+### Optimal Substructure
+
+This forms a recipe for greedy methods: 
+
+Formulate a problem such that we have to make a choice and are left with one subproblem afterwards. 
+
+Prove there is always an optimal solution that uses the greedy choice. 
+
+Show that combining the greedy choice and th eoptimal subproblem solution yields an optimal solution.
+
+Solve top-down with the greedy choice. One might have to 
+process the input to make it suitable for the greedy choice, 
+like sorting the input. 
+
+```{r}
+# example of setting up and solving an activity selection problem in R code
+
+# set up the data
+start <- c(1, 3, 0, 5, 8, 5)
+finish <- c(2, 4, 6, 7, 9, 9)
+
+# sort the data
+activity <- data.frame(start, finish)
+activity <- activity[order(activity$finish),]
+
+# greedy choices
+choices <- c(1)
+
+# repeat
+for (i in 2:nrow(activity)) {
+  if (activity$start[i] >= activity$finish[choices[length(choices)]]) {
+    choices <- c(choices, i)
+  }
+}
+
+activity[choices,]
+```
+

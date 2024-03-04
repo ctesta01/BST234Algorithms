@@ -11,6 +11,14 @@ book:
     - week2/week2.qmd
     - week3/week3.qmd
     - week4/week4.qmd
+    - week5/week5.qmd
+    - week6/week6.qmd
+    - week7/week7.qmd
+
+
+bibliography: references.bib
+reference-location: margin
+citation-location: margin
 
 format:
   html:
