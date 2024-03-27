@@ -205,6 +205,11 @@ window.Quarto = {
   <a href="../week6/week6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Week 6</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../week7/week7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Week 7</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -337,7 +342,7 @@ Tip
 <div>
 
 </div>
-<div class="quarto-layout-panel" data-layout-nrow="2" data-layout-ncol="3">
+<div class="quarto-layout-panel" data-layout-ncol="3" data-layout-nrow="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
 <p><img src="../week1/figures/insertion_sort/1/1.svg" class="img-fluid" width="300"></p>
@@ -385,7 +390,7 @@ Tip
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>   do A[i<span class="op">+</span><span class="dv">1</span>]</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>     i <span class="op">&lt;-</span> i <span class="op">-</span> <span class="dv">1</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>   A[i<span class="op">+</span><span class="dv">1</span>] <span class="op">&lt;-</span> key</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="alg-insertionsort" class="pseudocode-container" data-comment-delimiter="//" data-no-end="false" data-indent-size="1.2em" data-line-number-punc=":" data-alg-title="Algorithm" data-pseudocode-index="1" data-line-number="true">
+<div id="alg-insertionsort" class="pseudocode-container" data-alg-title="Algorithm" data-line-number="true" data-pseudocode-index="1" data-indent-size="1.2em" data-comment-delimiter="//" data-line-number-punc=":" data-no-end="false">
 <div class="pseudocode">
 \begin{algorithm} \caption{Insertion-Sort} \begin{algorithmic} \Procedure{InsertionSort}{$A$} \For{$j = p$ \To $r - 1$} \State $y \gets A[j]$ \State $\triangleright$ Insert $A[j]$ into the sorted sequence $A[1..j-1]$ \State $i \gets j-1$ \EndFor \While{$i &gt; 0$ and $A[i] &gt; key$} \State $A[i+1] \gets A[i]$ \State $i \gets i - 1$ \EndWhile \State $A[i + 1] \gets key$ \EndProcedure \end{algorithmic} \end{algorithm}
 </div>
@@ -418,7 +423,7 @@ Tip
     \right\}
   \]</span></li>
 </ol>
-<div id="algif" class="pseudocode-container" data-comment-delimiter="//" data-no-end="false" data-indent-size="1.2em" data-line-number-punc=":" data-alg-title="Algorithm" data-pseudocode-index="2" data-line-number="true">
+<div id="algif" class="pseudocode-container" data-alg-title="Algorithm" data-line-number="true" data-pseudocode-index="2" data-indent-size="1.2em" data-comment-delimiter="//" data-line-number-punc=":" data-no-end="false">
 <div class="pseudocode">
 \begin{algorithm} \caption{If-Example} \begin{algorithmic} \Procedure{If-Example}{$x$} \If{$x &lt; 100$} \State $y \gets x$ \Else \For{$i \gets 1$ \To $n$} \If{$A[i] &gt; y$} \State $y \gets A[i]$ \EndIf \EndFor \EndIf \EndProcedure \end{algorithmic} \end{algorithm}
 </div>
@@ -443,7 +448,7 @@ Tip
 <p>A sequential algorithm example:</p>
 <div class="grid">
 <div class="g-col-6">
-<div class="pseudocode-container" data-alg-title="Algorithm" data-pseudocode-index="3">
+<div class="pseudocode-container" data-pseudocode-index="3" data-alg-title="Algorithm">
 <div class="pseudocode">
 \begin{algorithm} \caption{Sequential-Example} \begin{algorithmic} \Procedure{Sequential-Example}{} \State{res $\gets$ 1} \For{$i = 1$ \To $n$} \State res = res $\cdot \; i$ \EndFor \State \textbf{return} res; \EndProcedure \end{algorithmic} \end{algorithm}
 </div>
@@ -452,7 +457,7 @@ Tip
 </div>
 <div class="grid">
 <div class="g-col-6">
-<div class="pseudocode-container" data-alg-title="Algorithm" data-pseudocode-index="4">
+<div class="pseudocode-container" data-pseudocode-index="4" data-alg-title="Algorithm">
 <div class="pseudocode">
 \begin{algorithm} \caption{Factorial} \begin{algorithmic} \Procedure{factorial}{n} \If{$n = 1$} \Return 1 \Else \Return {$n \; \cdot \;$ \textsc{factorial} $(n-1)$} \EndIf \EndProcedure \end{algorithmic} \end{algorithm}
 </div>
@@ -472,18 +477,18 @@ Tip
 <h3 class="anchored" data-anchor-id="merge-sort">Merge-Sort</h3>
 <p>The crux is that we can combine two sorted lists in linear time.</p>
 <p>Just combining is <span class="math inline">\(\mathcal O(n)\)</span>.</p>
-<div class="pseudocode-container" data-alg-title="Algorithm" data-pseudocode-index="5">
+<div class="pseudocode-container" data-pseudocode-index="5" data-alg-title="Algorithm">
 <div class="pseudocode">
 \begin{algorithm} \caption{Merge} \begin{algorithmic} \Procedure{Merge}{$a_1, a_2$} \State $i \gets 1$ \State $j \gets 1$ \State $k \gets 1$ \State $c \gets $ \textsc{Array}($n$) \While{$i,j &lt; n$} \If{$a_{1i} \leq a_{2j}$} \State $c_k \gets a_{1i}$ \State $i \gets i +1$ \Else \State $c_k \gets a_{2j}$ \State $j \gets j + 1$ \EndIf \State $k \gets k + 1$ \EndWhile \Return $c$ \EndProcedure \end{algorithmic} \end{algorithm}
 </div>
 </div>
-<div class="pseudocode-container" data-alg-title="Algorithm" data-pseudocode-index="6">
+<div class="pseudocode-container" data-pseudocode-index="6" data-alg-title="Algorithm">
 <div class="pseudocode">
 \begin{algorithm} \caption{MergeSort} \begin{algorithmic} \Procedure{MergeSort}{$a$} \State $A_1 \gets$ \textsc{HalfOf}$(A)$ \State $A_2 \gets$ \textsc{TheOtherHalf}$(A)$ \State $S_1 \gets$ \textsc{MergeSort}$(A_1)$ \State $S_2 \gets$ \textsc{MergeSort}$(A_2)$ \Return \textsc{Merge}$(S_1, S_2)$ \EndProcedure \end{algorithmic} \end{algorithm}
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode tikz code-with-copy"><code class="sourceCode latex"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">\usetikzlibrary</span>{decorations, calc, arrows, arrows.meta, positioning}</span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode tex code-with-copy"><code class="sourceCode latex"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">\usetikzlibrary</span>{decorations, calc, arrows, arrows.meta, positioning}</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">tikzpicture</span>}[</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  scale=4,</span>

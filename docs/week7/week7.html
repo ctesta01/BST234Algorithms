@@ -206,6 +206,11 @@ window.Quarto = {
    
   <ul>
   <li><a href="#recap-from-last-time" id="toc-recap-from-last-time" class="nav-link active" data-scroll-target="#recap-from-last-time">Recap from Last Time</a></li>
+  <li><a href="#moving-onto-numerical-algorithms" id="toc-moving-onto-numerical-algorithms" class="nav-link" data-scroll-target="#moving-onto-numerical-algorithms">Moving onto Numerical Algorithms</a>
+  <ul class="collapse">
+  <li><a href="#numerical-aspects-of-algorithms" id="toc-numerical-aspects-of-algorithms" class="nav-link" data-scroll-target="#numerical-aspects-of-algorithms">Numerical Aspects of Algorithms</a></li>
+  <li><a href="#numerical-error-propagated-vs.-computational-error" id="toc-numerical-error-propagated-vs.-computational-error" class="nav-link" data-scroll-target="#numerical-error-propagated-vs.-computational-error">Numerical Error: Propagated vs.&nbsp;Computational Error</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -358,11 +363,39 @@ x_{1} \\ \vdots \\ x_{n} \end{pmatrix} = x^T Q x.\]</span></p>
 </div>
 </div>
 </div>
-
-
 <div class="no-row-height column-margin column-container"><div id="ref-lucas_2014" class="csl-entry" role="listitem">
 Lucas, Andrew. 2014. <span>“Ising Formulations of Many NP Problems.”</span> <em>Frontiers in Physics</em> 2. <a href="https://doi.org/10.3389/fphy.2014.00005">https://doi.org/10.3389/fphy.2014.00005</a>.
-</div></div>
+</div></div></section>
+<section id="moving-onto-numerical-algorithms" class="level1">
+<h1>Moving onto Numerical Algorithms</h1>
+<section id="numerical-aspects-of-algorithms" class="level2">
+<h2 class="anchored" data-anchor-id="numerical-aspects-of-algorithms">Numerical Aspects of Algorithms</h2>
+<ol type="1">
+<li>Binary representation of floating point numbers</li>
+<li>Precision and accuracy</li>
+<li>Vector norms</li>
+<li>Relative and absolute numerical errors</li>
+<li>Well-posed and ill-posed numerical problems</li>
+<li>Condition number and well/ill-conditioned problems</li>
+<li>Sources of numerical errors</li>
+<li>Stability of linear equation systems.</li>
+</ol>
+<p>Types of errors: - in the model - in the input data - round-off errors - approximation errors/numerical method - errors due to arithmetic, caused by <span class="math inline">\(+\)</span> or <span class="math inline">\(\times\)</span> operators.</p>
+<p>For example, observe that <span class="math inline">\(14 = 2^3 + 2^2 + 2\)</span>. On older computers, we used to have problems with wrap-around.</p>
+<p>In this class, we may write <span class="math inline">\(\{ \oplus, \ominus, \odot, \oslash \}\)</span> to denote the machine equivalents of the operations <span class="math inline">\(\{ +, -, \cdot, / \}\)</span>.</p>
+</section>
+<section id="numerical-error-propagated-vs.-computational-error" class="level2">
+<h2 class="anchored" data-anchor-id="numerical-error-propagated-vs.-computational-error">Numerical Error: Propagated vs.&nbsp;Computational Error</h2>
+<p>We consider a function <span class="math inline">\(f\)</span> and its approximation <span class="math inline">\(\tilde f\)</span>.</p>
+<p>A value <span class="math inline">\(x\)</span> and its approximation <span class="math inline">\(\tilde x\)</span>.</p>
+<p>Then: <span class="math inline">\(||f(x) - \tilde f(\tilde x)|| = ||\underbrace{f(x) - f(\tilde x)}_{\text{propagated error}} + \underbrace{f(\tilde x) - \tilde f(\tilde x)}_{\text{computational error}}||\)</span></p>
+<p>Total error <code>:=</code> propagated error + computational error.</p>
+<p>The propagated error is not affected by the algorithm.</p>
+<p>The computational error is affected by the algorithm, and is capturing the idea that we’re not actually computing what we want to compute (e.g., <span class="math inline">\(f\)</span> differs from <span class="math inline">\(\tilde f\)</span>).</p>
+
+
+
+</section>
 </section>
 
 </main> <!-- /main -->
